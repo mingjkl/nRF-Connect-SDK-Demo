@@ -44,7 +44,6 @@ int main(void)
 		gpio_pin_set_dt(&led_red, 0);
 		k_msleep(500);
 	}
-	return 0;
 }
 
 #endif
@@ -69,7 +68,6 @@ int main(void)
 		nrf_gpio_pin_clear(LED_RED_PIN);
 		k_msleep(500);
 	}
-	return 0;
 }
 
 #endif
