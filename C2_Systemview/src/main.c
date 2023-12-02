@@ -53,5 +53,10 @@ void t2_thread(void *arg1, void *arg2, void *arg3)
 int main(void)
 {
 	printk("Hello World! %s\n", CONFIG_BOARD);
+	while(1)
+	{
+		printk("Main thread\r\n");
+		k_msleep(1000);
+	}
 	return 0;
 }
