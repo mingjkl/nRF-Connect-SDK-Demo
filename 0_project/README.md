@@ -2,7 +2,7 @@
  * @Author: emmovo
  * @Date: 2023-12-05 08:57:03
  * @LastEditors: emmovo mingjkl@live.com
- * @LastEditTime: 2023-12-05 11:31:34
+ * @LastEditTime: 2023-12-05 11:57:32
  * @FilePath: \0_project\README.md
  * @Description: 
  * 
@@ -45,7 +45,9 @@
     * xxx_board/dtsi
     * project/.overlay(优先级最高，会覆盖前面的内容)
   
-  构成关系如下图所示：![1701743890427](image/README/1701743890427.png)
+  构成关系如下图所示：
+  
+  ![1701743890427](image/README/1701743890427.png)
   
 ### CMakeLists.txt
   * CMakeLists.txt是CMake的配置文件，用于描述项目构建规则和构建过程；
