@@ -51,6 +51,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-*.png
-*.jpg
 *.mp4
