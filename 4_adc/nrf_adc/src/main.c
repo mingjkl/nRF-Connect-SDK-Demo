@@ -51,7 +51,7 @@ int main(void)
 	
 	while (1)
 	{
-		printk("vol=%d\r\n", adc_to_voltage(adc_value_get()));
+		LOG_INF("vol=%d\r\n", adc_to_voltage(adc_value_get()));
 		k_msleep(10);
 	}
 	
