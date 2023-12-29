@@ -12,13 +12,6 @@ LOG_MODULE_REGISTER(RB, LOG_LEVEL_DBG);
 
 #define RING_BUF_SIZE 40
 
-// struct data_ring_buf_t {
-// 	struct ring_buf rb;
-// 	uint8_t buf[RING_BUF_SIZE];
-// };
-
-// static struct data_ring_buf_t my_ring_buf;
-
 RING_BUF_DECLARE(my_ring_buf, RING_BUF_SIZE);
 
 void put_continuous_array(uint8_t cnt, uint8_t base)
