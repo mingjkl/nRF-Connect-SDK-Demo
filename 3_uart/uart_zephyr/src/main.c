@@ -5,85 +5,97 @@
  */
 
 #include <stdio.h>
-#include <zephyr/device.h>
 #include <zephyr/drivers/uart.h>
+#include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
 #include <zephyr/logging/log.h>
-
+#include <string.h>
 
 LOG_MODULE_REGISTER(uart, LOG_LEVEL_DBG);
 
-#define UART_BUF_SIZE 256			// uart rx buffer size
-static struct uart_rx_buf
+#define RECEIVE_TIMEOUT_US 1000 
+#define SLEEP_TIME_MS   100
+#define RECEIVE_BUFF_SIZE 255
+#define SEND_BUFF_SIZE 255
+
+const struct device *uart= DEVICE_DT_GET(DT_NODELABEL(uart0));
+static uint8_t rx_buf[RECEIVE_BUFF_SIZE] = {0};
+
+uint8_t tx_buf[SEND_BUFF_SIZE];
+uint8_t tx_buf_len = 0;
+
+static void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
 {
-	uint8_t buffer[UART_BUF_SIZE];
-	uint8_t pointer;
-};
+switch (evt->type) {
 
-static struct uart_rx_buf rx_buf = {
-	.pointer = 0,
-};
+	case UART_RX_RDY:
+		LOG_HEXDUMP_DBG(evt->data.rx.buf, evt->data.rx.len, "data: ");
 
-
-static void uart_rx_handler(struct device *dev)
-{
-
-	uint8_t data;
-
-    while (uart_irq_update(dev) && uart_irq_rx_ready(dev)) 
-    {
-
-        uart_fifo_read(dev, &data, sizeof(data));
-
-		rx_buf.buffer[rx_buf.pointer] = data;
-		rx_buf.pointer++;
-
-		if((rx_buf.pointer > UART_BUF_SIZE) || (data == '\n'))
-		{
-			LOG_HEXDUMP_DBG(rx_buf.buffer, rx_buf.pointer, "RX Data: ");
-			rx_buf.pointer = 0;
-			memset(rx_buf.buffer, 0, sizeof(rx_buf.buffer));
-			return;
+		for(uint16_t i = 0; i < evt->data.rx.len; i++){
+			tx_buf[i] = evt->data.rx.buf[i];
 		}
-    }
+
+		tx_buf_len = evt->data.rx.len;
+
+		uart_rx_disable(dev);
+
+		break;
+	case UART_RX_DISABLED:
+		uart_rx_enable(dev ,rx_buf,sizeof rx_buf,RECEIVE_TIMEOUT_US);
+		break;
+	default:
+		break;
+	}
 }
 
-int uart_init(void)
+int uart_data_send(const struct device *dev, const uint8_t *buf, uint8_t len)
 {
-	const struct device *uart_dev = DEVICE_DT_GET(DT_NODELABEL(uart0));
-	if(!uart_dev)
-	{
-		LOG_ERR("Cannot find uart\n");
-		return -1;
+	int ret;
+
+	ret = uart_tx(dev, buf, len, SYS_FOREVER_MS);
+	if (ret) {
+		LOG_ERR("Failed to send data over UART");
+		return ret;
 	}
 
-	uart_irq_callback_set(uart_dev, uart_rx_handler);
-	uart_irq_rx_enable(uart_dev);
-
-	LOG_INF("UART initialized\n");
-
-	return 0;
-}
-
-int uart_send(uint8_t *data, uint16_t len)
-{
-	const struct device *uart_dev = DEVICE_DT_GET(DT_NODELABEL(uart0));
-	if(!uart_dev)
-	{
-		LOG_ERR("Cannot find uart\n");
-		return -1;
-	}
-
-	for(uint16_t i = 0; i < len; i++)
-	{
-		uart_poll_out(uart_dev, data[i]);
-	}
 	return 0;
 }
 
 int main(void)
 {
-	printf("This is UART Demo! %s\n", CONFIG_BOARD);
-	uart_init();
-	uart_send("UART send data test\n", sizeof("UART send data test\r\n"));
+	int ret;
+
+	if (!device_is_ready(uart)){
+		LOG_ERR("UART device not ready\r\n");
+		return 1 ;
+	}
+	else{
+		LOG_INF("UART device ready\r\n");
+	}
+
+	ret = uart_callback_set(uart, uart_cb, NULL);
+	if (ret) {
+		LOG_ERR("Cannot set callback");
+		return 1;
+	}
+
+	ret = uart_rx_enable(uart, rx_buf, sizeof rx_buf, RECEIVE_TIMEOUT_US);
+	if (ret) {
+		LOG_ERR("Cannot enable rx");
+		return 1;
+	}
+
+
+	while (1) {
+
+		if(tx_buf_len > 0){
+			uart_data_send(uart, tx_buf, tx_buf_len);
+			tx_buf_len = 0;
+		}
+
+		k_msleep(SLEEP_TIME_MS);
+	}
+
 	return 0;
 }
