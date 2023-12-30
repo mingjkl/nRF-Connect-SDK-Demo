@@ -1,7 +1,7 @@
 ## Introduction
 This demo modifies the UART data echo to be implemented through a workqueue instead of directly in the interrupt handler. This approach aims to reduce interrupt response time and enhance the system's real-time performance.
 
-The demo is based on the integration of [\3_uart\uart_zephyr]() and modifies the original demo by replacing the UART data echo implementation in the `main` function's `while(1)` loop with a workqueue-based approach.
+The demo is based on the integration of [\3_uart\uart_zephyr](3_uart\uart_zephyr) and modifies the original demo by replacing the UART data echo implementation in the `main` function's `while(1)` loop with a workqueue-based approach.
 
 ## Code Analysis
 * Remove part of the code in `main`:
@@ -48,4 +48,4 @@ The demo is based on the integration of [\3_uart\uart_zephyr]() and modifies the
 * Compile and flash the program.
 * Verification:
     * Open the serial port to realize UART data echo. Here, our echo is now implemented using a workqueue.
-    * However, we are using the default workqueue. If you need to customize the priority and stack size, you can define your own workqueue. For details, refer to the demo.
+    * However, we are using the default workqueue. If you need to customize the priority and stack size, you can define your own workqueue. For details, refer to the [workqueue](D5_workqueue\workqueue).

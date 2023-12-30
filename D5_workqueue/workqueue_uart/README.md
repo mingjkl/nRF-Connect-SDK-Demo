@@ -1,7 +1,7 @@
 ## 简介
 这个demo是将uart的数据echo改为通过workqueue实现的uart数据echo。以降低中断的响应时间，提高系统的实时性。
 
-这个demo是基于[\3_uart\uart_zephyr]()的集成上实现的，将原本的demo上在`main`函数的`while(1)`中实现的uart数据echo改成了，通过workqueue实现的uart数据echo。
+这个demo是基于[\3_uart\uart_zephyr](3_uart\uart_zephyr)的集成上实现的，将原本的demo上在`main`函数的`while(1)`中实现的uart数据echo改成了，通过workqueue实现的uart数据echo。
 
 ## 代码分析
 * 删除main部分代码
@@ -48,4 +48,4 @@
 * 编译并烧录程序
 * 验证
     * 我们打开串口，实现uart的数据echo。这里我们的echo就改为了workqueue实现的echo。
-    * 不过我们这里使用的是默认的workqueue，如果我们需要自定义优先级和stack的大小，可以自定义workqueue，具体可以参考demo。
+    * 不过我们这里使用的是默认的workqueue，如果我们需要自定义优先级和stack的大小，可以自定义workqueue，具体可以参考[workqueue](D5_workqueue\workqueue)。

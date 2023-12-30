@@ -3,7 +3,7 @@
 
 这是一个关于work queue的demo，demo中定义了一个work queue，定义了两个work。然后将两个work分别放入work queue中并执行。
 
-这里演示的是work queue的基本使用方法，另外一个配合uart使用更直观。
+这里演示的是work queue的基本使用方法，另外一个配合[workqueue_uart](D5_workqueue\workqueue_uart)使用更直观。
 
 ## 代码介绍
 * 定义一个栈空间，用于存放work queue中的work

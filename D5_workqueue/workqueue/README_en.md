@@ -3,7 +3,7 @@ Work queues are particularly useful when you need to perform tasks without block
 
 This is a demo of a work queue, where a work queue is defined and two works are defined. the two works are then put into the work queue and executed separately.
 
-This demonstrates the basic use of a work queue, and the other one is more intuitive to use with uart.
+This demonstrates the basic use of a work queue, and the other one is more intuitive to use with [workqueue_uart](D5_workqueue\workqueue_uart).
 
 ## Code introduction
 * Define a stack space to hold the work in the work queue.
