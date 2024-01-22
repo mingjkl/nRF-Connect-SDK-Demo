@@ -117,7 +117,7 @@ This demo showcases the usage of the PWM peripheral. It defines 4 pins as PWM ou
     We add this code to the main function. It creates the effect of PWM1's duty cycle changing between 10% and 90%, with a 100ms interval.
 * Compile and flash the program to your development board. Use an oscilloscope or logic analyzer to measure the waveforms of PWM_PIN_0 and PWM_PIN_1. You will observe that the duty cycle of PWM_PIN_0 is 50%, while the duty cycle of PWM_PIN_1 varies between 10% and 90%, with a frequency of 10kHz.
 
-   ![pwm0 waveform measured with oscilloscope](/gif/pwm0.gif)
+   ![pwm0](/gif/pwm0.gif)
 
 * Next, let's try using a common duty cycle. We modify the configuration for PWM1 as follows. We define another PWM instance for PWM1 and provide it with a different configuration:
     ```
@@ -167,4 +167,4 @@ This demo showcases the usage of the PWM peripheral. It defines 4 pins as PWM ou
     ```
 * Compile and flash the program to your development board. Use an oscilloscope or logic analyzer to measure the waveforms of PWM_PIN_2 and PWM_PIN_3. You will observe that PWM_PIN_2 and PWM_PIN_3 have the same duty cycle, ranging from 0% to 100%, with 10% intervals, just like the values we wrote into pwm_duty_common.
 
-   ![pwm1 waveform measured with oscilloscope](/gif/pwm1.gif)
+   ![pwm1](/gif/pwm1.gif)
