@@ -56,6 +56,11 @@
     ```
     我们先将timer外设清零，然后计算出5s对应的ticks值，最后将ticks值配置到timer外设的比较寄存器中，当timer外设的计数值达到比较寄存器的值时，就会触发中断。同时还配置了timer外设的比较寄存器达到比较值时，自动清零timer外设的计数值(NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK)。
 
+* 使能timer外设
+    ```
+    nrfx_timer_enable(&timer);
+    ```
+
 * 编译并烧录程序，我们通过RTT Viewer输出的log可以看到，每隔5s时间timer中断触发一次并输出一条信息；
     ```
     00> *** Booting Zephyr OS build v3.3.99-ncs1 ***
