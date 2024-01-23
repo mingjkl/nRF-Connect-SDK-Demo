@@ -1,16 +1,44 @@
 # Nordic connect sdk demo
 
-#### 介绍
-"Nordic Connect SDK Demo" 是一个基于 Zephyr API 和 Nordic HAL API 的示例项目集合。该项目旨在展示使用 Nordic Connect SDK 开发应用程序的能力和灵活性。
+## ✨ 介绍
 
-该项目包含了多个示例，涵盖了各种常见的应用场景和功能。通过这些示例，开发人员可以学习如何使用 Zephyr API 和 Nordic HAL API 来构建高效、可靠的嵌入式应用程序。
+这个项目是基于Nordic connect sdk做的一个demo合集，里面包含了很多demo，这些demo希望可以帮助大家快速上手Nordic connect sdk。同时可以用最少的代码量实现一些功能。demo参考的源有些多，有NRF5 SDK的demo，zephyr的sample和nrfx的sample；内容主要是围绕片上外设的驱动为主，也包含了一些开发工具的介绍。如果有不正确的地方，欢迎指正。
 
-Zephyr API 是一个功能强大的开源嵌入式操作系统的应用程序接口，具有丰富的功能和广泛的硬件支持。开发人员可以利用 Zephyr API 实现任务调度、外设控制、内存管理等功能。
+注意：NCS更新比较频繁，demo不能做到及时更新，所以demo中的代码可能会有些过时，但是还是希望可以给大家带来参考；
 
-Nordic HAL API 是 Nordic Semiconductor 提供的硬件抽象层接口，针对 Nordic 的硬件平台进行了优化。通过使用 Nordic HAL API，开发人员可以更方便地访问和控制 Nordic 的硬件功能，如无线通信、传感器、存储器等。
+## 🖥 开发环境
+* 开发平台：Windows 11
+* 开发工具：Vscode + nRF Connect
+* SDK版本：Nordic connect sdk v2.4.2
+* 工具链版本：Nordic connect sdk Toolchain v2.5.0
+* 开发板：nRF52840 DK
 
-每个示例都提供了详细的文档和示例代码，以帮助开发人员快速理解和使用不同的 API。示例范围涵盖了从基本的任务调度和外设控制，到更复杂的通信协议和传感器应用。
+## 📢 完成度
+* ### 外设类
+  * [x] GPIO
+  * [x] UART
+  * [x] ADC
+  * [ ] SPI
+  * [ ] I2C
+  * [ ] DMA
+  * [x] TIMER
+  * [x] PWM
+  * [ ] RAIDO
+  * [ ] USBD
+  * [ ] WDT
+  * [x] RTC
 
-无论您是初学者还是有经验的嵌入式开发人员，"Nordic Connect SDK Demo" 都将为您提供一个学习和实践的平台，帮助您更好地掌握 Zephyr API 和 Nordic HAL API，并加速您的应用程序开发过程。
+* ### 系统类
+  * [x] Thread Create
+  * [x] Thread Scheduling
+  * [x] Thread Semaphore
+  * [x] FIFI
+  * [x] Ringbuffer
+  * [x] Workqueue
 
-欢迎加入这个项目，探索嵌入式开发的无限可能性！
+* ### 工具类
+  * [x] RTT
+  * [x] CMake
+  * [x] JScope
+  * [x] SystemView   
+  * [x] Logging 
