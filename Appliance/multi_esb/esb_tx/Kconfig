@@ -1,0 +1,21 @@
+source "Kconfig.zephyr"
+
+menu "EM ESB config"
+
+config EESB_RETRANSMIT_DELAY
+	int "retransmit delay"
+	default 600
+
+config EESB_RETRANSMIT_COUNT
+    int "retransmit count"
+    default 3
+
+config EESB_PAYLOAD_LENGTH
+    int "payload length"
+    default 252
+
+config EESB_USE_FAST_RAMP_UP
+    bool "use fast ramp up"
+    default n
+
+endmenu

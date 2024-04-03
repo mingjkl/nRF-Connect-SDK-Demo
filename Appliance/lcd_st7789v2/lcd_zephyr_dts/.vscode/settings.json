@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.md": "markdown",
+        "devicetree.h": "c",
+        "display.h": "c",
+        "gpio.h": "c",
+        "ui.h": "c",
+        "ui_helpers.h": "c"
+    }
+}

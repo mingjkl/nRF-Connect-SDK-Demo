@@ -1,0 +1,2 @@
+## Introduction
+This is a demo of a software-based I2C implementation. In this demo, data is written to an AT24C02 device using I2C, then read back, and finally printed out. There is nothing special about it; it is just a simple simulation of I2C communication.

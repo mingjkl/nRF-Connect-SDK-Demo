@@ -1,0 +1,6 @@
+{
+    "C_Cpp.default.configurationProvider": "nordic-semiconductor.nrf-connect",
+    "files.associations": {
+        "eesb.h": "c"
+    }
+}
